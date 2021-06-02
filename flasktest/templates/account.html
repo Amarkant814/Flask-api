@@ -1,0 +1,41 @@
+{% extends "layout.html"%}
+{% block content %}
+<div >
+
+    <div id="img-container" style="width: 560px;">
+        <img src="{{image_file}}">
+    </div>
+    <br>
+
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+            <div class="form-group">
+                {{ form.picture.label() }}
+                {{ form.picture(class = "form-control-file") }}
+                {% if form.picture.errors %}
+                    {% for error in form.picture.errors %}
+                        <span class="text-danger">{{ error }}</span><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </form>
+    </div>
+  </div>
+  
+
+  <script>
+    var options ={
+        width:400,
+        height:250,
+        zoomWidth:100,
+        offset:{ vertical: 0, horizontal: 10 },
+        scale:1.3
+    }
+    new ImageZoom(document.getElementById("img-container"), options);
+</script>
+
+
+{% endblock %}
